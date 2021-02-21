@@ -1,3 +1,4 @@
+<!-- Dev by TheBigBoss33 -->
 <!DOCTYPE html>
 <html>
 <head>
@@ -6,7 +7,7 @@
     <title>Lang-Manager</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
 </head>
-<body onload="initLang()">
+<body onload="initLang()"> 
     <h1 id="welcomeMessage">Hello</h1>
     <select name="langs" id="lang-select">
         
@@ -14,53 +15,53 @@
     <label id="labelSelectLang" for="lang-select">Chose lang please</label>
     <button id="LangDoneBtn" onclick="validateLang()">Done</button>
     <script>
-        var langMap = new Map();
+        var langMap = new Map(); // New map for all langs
         const fs = require('fs');
 
         function initLang (){
         
-        const langFiles = fs.readdirSync('./langs').filter(file => file.endsWith('.json'));
+        const langFiles = fs.readdirSync('./langs').filter(file => file.endsWith('.json')); //Get all langs files .json
 
-        var langSelect = document.getElementById("lang-select");
+        var langSelect = document.getElementById("lang-select"); 
         var langNumber = 0;
         var length = langSelect.options.length;
         for (i = length-1; i >= 0; i--) {
-            langSelect.options[i] = null;
+            langSelect.options[i] = null; //Clear all option
         }
-        for (const file of langFiles) {
+        for (const file of langFiles) { //Execute for each lang file
            langNumber ++;
             const lang = require(`./langs/${file}`);
-            var option = document.createElement('option');
-            option.text = lang.name;
-            langSelect.add(option);
+            var option = document.createElement('option'); //Create the option
+            option.text = lang.name;//Set option
+            langSelect.add(option);//Add the option
             langMap.set(lang.name, file);
         }
-        if(localStorage.getItem('lang') && localStorage.getItem('lang-file')){
+        if(localStorage.getItem('lang') && localStorage.getItem('lang-file')){ // if have localstorage
 
-            document.getElementById('lang-select').value = localStorage.getItem('lang');
+            document.getElementById('lang-select').value = localStorage.getItem('lang'); // Set selector option to the lang selected
             const fs = require('fs');
-            fs.readFile('./langs/' + localStorage.getItem("lang-file"), 'utf8' , (err, data) => {
+            fs.readFile('./langs/' + localStorage.getItem("lang-file"), 'utf8' , (err, data) => { // Read the lang file selectioned
                 if (err) {
-                 console.error(err)
+                 console.error(err) // Log if have a error
                 return
                 }
-                const file = JSON.parse(data);
-                document.getElementById("labelSelectLang").innerHTML = file.ChooseLanguage;
-                document.getElementById("welcomeMessage").innerHTML = file.WelcomeMessage;
-                console.log(data);
+                const file = JSON.parse(data); // Parse the json
+                document.getElementById("labelSelectLang").innerHTML = file.ChooseLanguage; // Change text for the text in lang file
+                document.getElementById("welcomeMessage").innerHTML = file.WelcomeMessage; // You can add line here for change lang of other components of the page
+                console.log(data);// Log the json object
                 })
         }
     }
 
-    function validateLang (){
-        const langSelect = document.getElementById("lang-select");
-        localStorage.removeItem('lang');
-        localStorage.removeItem('lang-file');
-        localStorage.setItem('lang', langSelect.value);
-        localStorage.setItem('lang-file', langMap.get(langSelect.value));
-        console.log(localStorage.getItem('lang'));
-        console.log(localStorage.getItem('lang-file'));
-        initLang()
+    function validateLang (){ // When button done is pressed
+        const langSelect = document.getElementById("lang-select"); // Get selector
+        localStorage.removeItem('lang'); // Clear localstorage
+        localStorage.removeItem('lang-file'); // Clear localstorage
+        localStorage.setItem('lang', langSelect.value); // Add the lang name at localstorage
+        localStorage.setItem('lang-file', langMap.get(langSelect.value));// Add the lang name at localstorage
+        console.log(localStorage.getItem('lang')); // Log to console
+        console.log(localStorage.getItem('lang-file'));// Log to console
+        initLang()//Re init for save change
     }
     </script>
 
