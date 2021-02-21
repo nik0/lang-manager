@@ -1,3 +1,5 @@
+// Dev by TheBigBoss33 21/02/2021
+
 //Electron initialisation
 const { app, BrowserWindow, ipcMain } = require("electron")
 const path = require('path')

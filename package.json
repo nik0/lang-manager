@@ -1,7 +1,7 @@
 {
   "name": "lang-manager",
-  "version": "1.0.0",
-  "description": "Est un projet que vous allez pouvoir mettre dans votre launcher minecraft electron pour modifier les langues et les controler depuis des .json comme fr.json ou en.json",
+  "version": "1.0.1",
+  "description": "Est un projet que vous allez pouvoir mettre dans votre application electron pour modifier les langues et les controler depuis des .json comme fr.json ou en.json",
   "main": "index.js",
   "scripts": {
     "start": "electron ."

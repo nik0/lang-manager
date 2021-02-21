@@ -1,6 +1,6 @@
 {
     "name": "Francais",
-    "WelcomeMessage": "Bonjour",
+    "WelcomeMessage": "Bonjour !",
     "ChooseLanguage": "Choisis une langue",
     "ErrorMessage": {
         "InvalidIdentifiants": "Identifiants invalides"
