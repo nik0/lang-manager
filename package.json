@@ -1,0 +1,22 @@
+{
+  "name": "lang-manager",
+  "version": "1.0.0",
+  "description": "Est un projet que vous allez pouvoir mettre dans votre launcher minecraft electron pour modifier les langues et les controler depuis des .json comme fr.json ou en.json",
+  "main": "index.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Thebigboss33/lang-manager.git"
+  },
+  "author": "TheBigBoss33",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Thebigboss33/lang-manager/issues"
+  },
+  "homepage": "https://github.com/Thebigboss33/lang-manager#readme",
+  "dependencies": {
+    "fs": "0.0.1-security"
+  }
+}

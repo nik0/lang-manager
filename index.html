@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Lang-Manager</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+</head>
+<body onload="initLang()">
+    <h1 id="welcomeMessage">Hello</h1>
+    <select name="langs" id="lang-select">
+        
+    </select>
+    <label id="labelSelectLang" for="lang-select">Chose lang please</label>
+    <button id="LangDoneBtn" onclick="validateLang()">Done</button>
+    <script>
+        var langMap = new Map();
+        const fs = require('fs');
+
+        function initLang (){
+        
+        const langFiles = fs.readdirSync('./langs').filter(file => file.endsWith('.json'));
+
+        var langSelect = document.getElementById("lang-select");
+        var langNumber = 0;
+        var length = langSelect.options.length;
+        for (i = length-1; i >= 0; i--) {
+            langSelect.options[i] = null;
+        }
+        for (const file of langFiles) {
+           langNumber ++;
+            const lang = require(`./langs/${file}`);
+            var option = document.createElement('option');
+            option.text = lang.name;
+            langSelect.add(option);
+            langMap.set(lang.name, file);
+        }
+        if(localStorage.getItem('lang') && localStorage.getItem('lang-file')){
+
+            document.getElementById('lang-select').value = localStorage.getItem('lang');
+            const fs = require('fs');
+            fs.readFile('./langs/' + localStorage.getItem("lang-file"), 'utf8' , (err, data) => {
+                if (err) {
+                 console.error(err)
+                return
+                }
+                const file = JSON.parse(data);
+                document.getElementById("labelSelectLang").innerHTML = file.ChooseLanguage;
+                document.getElementById("welcomeMessage").innerHTML = file.WelcomeMessage;
+                console.log(data);
+                })
+        }
+    }
+
+    function validateLang (){
+        const langSelect = document.getElementById("lang-select");
+        localStorage.removeItem('lang');
+        localStorage.removeItem('lang-file');
+        localStorage.setItem('lang', langSelect.value);
+        localStorage.setItem('lang-file', langMap.get(langSelect.value));
+        console.log(localStorage.getItem('lang'));
+        console.log(localStorage.getItem('lang-file'));
+        initLang()
+    }
+    </script>
+
+</body>
+</html>

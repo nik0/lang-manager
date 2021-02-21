@@ -1,0 +1,8 @@
+{
+    "name": "English",
+    "WelcomeMessage": "Hello",
+    "ChooseLanguage": "Choose a  lang",
+    "ErrorMessage": {
+        "InvalidIdentifiants": "Invalid password or username"
+    }
+}
